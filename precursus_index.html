@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precursus — We Arrive Before the Light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Rajdhani:wght@300;400;500;600&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --deep: #0d0d0d;
+    --surface: #111111;
+    --border: #1e1e1e;
+    --border-light: #2a2a2a;
+    --gold: #b8965a;
+    --gold-light: #d4aa6e;
+    --gold-dim: #7a6038;
+    --white: #f0ede8;
+    --white-dim: #9a9590;
+    --white-faint: #3a3835;
+    --accent: #c4a96a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.4s, background 0.4s;
+  }
+
+  nav.scrolled {
+    border-color: var(--border);
+    background: rgba(8,8,8,0.95);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 48px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 160px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(184,150,90,0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(184,150,90,0.02) 0%, transparent 60%),
+      linear-gradient(180deg, #080808 0%, #0a0a0a 100%);
+  }
+
+  .hero-line {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    width: 1px;
+    height: 0;
+    background: linear-gradient(180deg, transparent, var(--gold-dim), transparent);
+    animation: lineGrow 2s ease-out 0.5s forwards;
+  }
+
+  @keyframes lineGrow {
+    to { height: 100%; }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 0.8s forwards;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow::before {
+    content: '—— ';
+    color: var(--gold-dim);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease-out 1s forwards;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--white-dim);
+    text-transform: uppercase;
+    max-width: 480px;
+    line-height: 2;
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 1.3s forwards;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-dim);
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 1.6s forwards;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 48px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-out 2s forwards;
+    z-index: 1;
+  }
+
+  .hero-scroll span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--white-faint);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gold);
+    animation: scrollAnim 2s ease-in-out 2s infinite;
+  }
+
+  @keyframes scrollAnim {
+    0% { left: -100%; }
+    50% { left: 0; }
+    100% { left: 100%; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 140px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .full-width {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .section-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 120px;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 40px;
+    letter-spacing: -0.01em;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--white-dim);
+    line-height: 1.9;
+    max-width: 660px;
+  }
+
+  .gold-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 48px 0;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 60px;
+  }
+
+  /* WHAT WE ARE */
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 80px;
+  }
+
+  .what-left p { max-width: 520px; }
+
+  .what-right {
+    border-left: 1px solid var(--border);
+    padding-left: 60px;
+  }
+
+  .manifesto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.8;
+    opacity: 0.85;
+  }
+
+  .manifesto strong {
+    font-weight: 600;
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* MEMBERSHIP */
+  .membership-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 64px;
+    margin-top: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .membership-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .membership-block h3 {
+    font-size: 0.7rem;
+    font-family: 'Courier Prime', monospace;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+
+  .membership-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--white);
+    max-width: 680px;
+    line-height: 1.8;
+  }
+
+  /* INITIATIVE SECTION */
+  .initiative-hero {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 140px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .initiative-hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(184,150,90,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .initiative-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .initiative-stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin: 80px 0;
+    background: var(--border);
+  }
+
+  .stat-block {
+    background: var(--deep);
+    padding: 48px 40px;
+    position: relative;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    font-weight: 400;
+  }
+
+  /* PROBLEM GRID */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    margin-top: 80px;
+  }
+
+  .problem-card {
+    background: var(--deep);
+    padding: 56px 48px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .problem-card:hover { background: #141414; }
+
+  .problem-number {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .problem-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  .problem-card p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    max-width: 100%;
+  }
+
+  .problem-solution {
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .solution-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .problem-solution p {
+    font-size: 0.85rem;
+    color: rgba(240,237,232,0.6);
+    line-height: 1.7;
+  }
+
+  /* BACKBONE TEASE */
+  .backbone-section {
+    padding: 140px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .backbone-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 80px;
+  }
+
+  .backbone-intro p { max-width: 100%; }
+
+  .system-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .system-item {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .system-item:last-child { border-bottom: none; }
+  .system-item:hover { background: var(--surface); }
+
+  .system-item-num {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.2em;
+    min-width: 32px;
+  }
+
+  .system-item-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    font-weight: 400;
+  }
+
+  .system-item-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .ncnd-note {
+    margin-top: 48px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--gold-dim);
+  }
+
+  .ncnd-note p {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    color: var(--white-faint);
+    letter-spacing: 0.05em;
+    max-width: 100%;
+    line-height: 1.7;
+  }
+
+  .ncnd-note p strong {
+    color: var(--gold-dim);
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 140px 60px;
+    position: relative;
+  }
+
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: start;
+  }
+
+  .contact-left p { max-width: 100%; }
+
+  .contact-left .manifesto {
+    font-size: 1.1rem;
+    margin-top: 32px;
+    opacity: 0.7;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 28px;
+  }
+
+  label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 8px;
+  }
+
+  input, textarea, select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    padding: 12px 0;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--white-faint);
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--gold-dim);
+  }
+
+  textarea {
+    resize: none;
+    height: 120px;
+  }
+
+  select option {
+    background: var(--surface);
+    color: var(--white);
+  }
+
+  .submit-btn {
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 16px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .submit-btn:hover {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+  }
+
+  .form-note {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    color: var(--white-faint);
+    letter-spacing: 0.1em;
+    margin-top: 20px;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--white-faint);
+  }
+
+  .footer-copy {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--white-faint);
+    text-transform: uppercase;
+  }
+
+  /* SUCCESS MESSAGE */
+  .success-msg {
+    display: none;
+    padding: 32px;
+    border: 1px solid var(--gold-dim);
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .success-msg p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--gold);
+    max-width: 100%;
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 24px 32px; }
+    .nav-links { gap: 28px; }
+    section, .initiative-hero, .backbone-section, .contact-section { padding: 80px 32px; }
+    .what-grid, .backbone-intro, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .what-right { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 48px; }
+    .initiative-stat-row { grid-template-columns: 1fr 1fr; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .hero { padding: 140px 32px 80px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .divider { margin: 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Precursus</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#initiative">Initiative</a></li>
+    <li><a href="#system">The Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <p class="hero-eyebrow">Private Think Tank &nbsp;·&nbsp; By Invitation</p>
+  <h1 class="hero-title">We Arrive<br><em>Before</em><br>the Light.</h1>
+  <p class="hero-sub">Precursus is where the most consequential problems of our time meet the rarest category of mind.</p>
+  <p class="hero-tagline">Precursus — Before the light. Before the rest.</p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</div>
+
+<!-- WHAT WE ARE -->
+<section id="about">
+  <p class="section-label">What We Are</p>
+  <h2>Not a company.<br>Not a foundation.<br><em>Something rarer.</em></h2>
+  <div class="what-grid">
+    <div class="what-left reveal">
+      <p>Precursus is an exclusive private think tank. Our members are united by a single conviction: the most consequential problems facing modern and future societies are not unsolvable. They are simply unsolved because the right minds have not yet been pointed at them together.</p>
+      <div class="gold-rule"></div>
+      <p>We do not produce white papers. We do not convene conferences. We do not optimize what already exists. We question the assumptions everyone else has accepted as permanent — and then we build what comes after those assumptions are broken.</p>
+      <div class="gold-rule"></div>
+      <p>Walt Disney called them Imagineers. We call them members. The distinction from every other innovation group is simple: Precursus members do not theorize about change. They engineer it.</p>
+    </div>
+    <div class="what-right reveal reveal-delay-2">
+      <p class="manifesto">"The most consequential problems are not unsolvable. They are simply unsolved because the right minds have not yet been <strong>pointed at them together</strong>."</p>
+      <div class="membership-block" style="margin-top: 48px;">
+        <h3>On Membership</h3>
+        <p>Membership is by invitation only. It is earned — not purchased. The currency is demonstrated competence, original thinking, and an uncompromising instinct to see what others have missed. There are no application forms. There are no committees. There is only the quality of your mind and what you have done with it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INITIATIVE SECTION -->
+<div class="initiative-hero" id="initiative">
+  <div class="initiative-inner">
+    <p class="section-label">First Initiative</p>
+    <h2>Sub-Saharan Africa.<br>The most complex <em>humanitarian<br>convergence</em> on earth.</h2>
+
+    <div class="initiative-stat-row reveal">
+      <div class="stat-block">
+        <span class="stat-number">400M+</span>
+        <span class="stat-label">Without reliable clean water</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-number">40%</span>
+        <span class="stat-label">Of food lost to post-harvest spoilage</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-number">3.7mi</span>
+        <span class="stat-label">Average daily water walk — women and girls</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-number">660K</span>
+        <span class="stat-label">Cubic miles of groundwater — untapped beneath the surface</span>
+      </div>
+    </div>
+
+    <div class="problem-grid reveal">
+
+      <div class="problem-card">
+        <span class="problem-number">01 ——</span>
+        <h3>The Water Crisis</h3>
+        <p>Sub-Saharan Africa sits above one of the largest groundwater reserves on earth. The water exists. The crisis is not scarcity — it is access, purification, and delivery without grid dependency. Waterborne disease from biological, chemical, and emerging contaminants kills hundreds of thousands annually. The contamination source and the purification solution are, in a profound sense, the same material.</p>
+        <div class="problem-solution">
+          <span class="solution-label">Precursus Approach</span>
+          <p>Deep aquifer extraction powered entirely by renewable energy and waste-derived syngas. A three-stage purification system requiring zero external chemicals, powered by the system's own waste heat. The contamination stream becomes the purification engine.</p>
+        </div>
+      </div>
+
+      <div class="problem-card">
+        <span class="problem-number">02 ——</span>
+        <h3>The Sanitation Crisis</h3>
+        <p>Open defecation is the primary driver of water contamination across rural sub-Saharan Africa. Every solution deployed to date has treated sanitation and water as separate problems requiring separate interventions, separate funding streams, and separate infrastructure. They are not separate. The waste destroying the water supply is the energy source required to purify it.</p>
+        <div class="problem-solution">
+          <span class="solution-label">Precursus Approach</span>
+          <p>Community waste collection integrated with a pyrolysis processing cascade. Human and animal waste becomes reactor feedstock. Reactor heat purifies water. Biochar filters contaminants. The problem fuels its own solution perpetually.</p>
+        </div>
+      </div>
+
+      <div class="problem-card">
+        <span class="problem-number">03 ——</span>
+        <h3>The Food Security Crisis</h3>
+        <p>Forty percent of sub-Saharan African food production never reaches consumers — lost to post-harvest spoilage from lack of refrigeration, inadequate storage, and broken supply chains. Simultaneously, soil depletion from extractive agriculture without amendment reduces yields year over year. The continent grows enough food. It cannot keep it.</p>
+        <div class="problem-solution">
+          <span class="solution-label">Precursus Approach</span>
+          <p>Integrated aquaponics, controlled environment crop production, and protein cascades producing food within the node. Biochar soil amendment returning fertility to surrounding agricultural land. Cold storage powered by the deep groundwater thermal differential — the cool water that already exists beneath the surface.</p>
+        </div>
+      </div>
+
+      <div class="problem-card">
+        <span class="problem-number">04 ——</span>
+        <h3>The Energy Crisis</h3>
+        <p>Grid electricity is unavailable or unreliable across most of rural sub-Saharan Africa. Every previous water and food solution has failed at exactly this point — the moment external energy is removed. Solar alone is insufficient without storage. Wind alone is insufficient without backup. A genuinely off-grid energy system requires multiple generation sources with integrated thermal storage. None of the deployed solutions have achieved this.</p>
+        <div class="problem-solution">
+          <span class="solution-label">Precursus Approach</span>
+          <p>Heliostat solar tower, waste-derived biogas and syngas, deep groundwater thermoelectric generation, and captured pyrolysis heat — all converging in an underground thermal storage system. The node generates its own energy continuously from sources that cannot be removed.</p>
+        </div>
+      </div>
+
+      <div class="problem-card">
+        <span class="problem-number">05 ——</span>
+        <h3>The Dependency Failure</h3>
+        <p>Every water project, solar pump, biogas digester, and vertical farm deployed in Africa over fifty years shares one fatal flaw: external dependency. External energy. External chemicals. External supply chains. External maintenance expertise. External donor funding for perpetual operation. Remove any single dependency and the system fails. The graveyard of African development is full of elegant technologies that worked in one village and collapsed when the NGO left.</p>
+        <div class="problem-solution">
+          <span class="solution-label">Precursus Approach</span>
+          <p>A system that requires no external inputs beyond the initial capital deployment. Every input the node needs — energy, purification media, fertilizer, protein feed — it generates from the waste streams it is eliminating. Self-sustaining from commissioning day one.</p>
+        </div>
+      </div>
+
+      <div class="problem-card">
+        <span class="problem-number">06 ——</span>
+        <h3>The Participation Problem</h3>
+        <p>Women and girls walk an average of 3.7 miles daily to collect contaminated water. That single burden removes girls from school, removes women from economic participation, and perpetuates generational poverty across the continent. Every solution requiring community behavioral change has failed to sustain participation after external facilitators depart. Behavioral change cannot be engineered. Economic incentive can.</p>
+        <div class="problem-solution">
+          <span class="solution-label">Precursus Approach</span>
+          <p>Clean water distributed at the village level in exchange for household organic waste participation. The water walk is eliminated. The exchange is economically rational for every household every day without enforcement. Girls return to school. Women recover hours of daily productive time. The system creates its own participation momentum.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- BACKBONE TEASE -->
+<div class="backbone-section" id="system">
+  <p class="section-label">The Work</p>
+  <h2>One node.<br>Every problem.<br><em>One cascade.</em></h2>
+
+  <div class="backbone-intro">
+    <div class="reveal">
+      <p>The Precursus integrated node is not a collection of solutions placed next to each other. It is a cascade — a system in which every waste stream from one process becomes the input for the next. Nothing leaves the system as waste. Everything enters the next productive cycle.</p>
+      <div class="gold-rule"></div>
+      <p>A single node serves a village of 500 people. It produces clean drinking water, food, electricity, and permanent employment simultaneously — from a standardized modular structure that can be manufactured in-country, deployed by trained local technicians, and replicated without limit.</p>
+      <div class="gold-rule"></div>
+      <p>One node proves the concept. One hundred nodes transforms a region. One thousand nodes changes a continent — built by Africans, owned by communities, sustained by the economics of the system itself.</p>
+      <div class="ncnd-note">
+        <p><strong>Note:</strong> Full technical architecture, system specifications, CAPEX analysis, and deployment model are available to qualified parties after execution of a mutual Non-Circumvention Non-Disclosure Agreement. What is described here is the surface of what has been designed.</p>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <ul class="system-list">
+        <li class="system-item">
+          <span class="system-item-num">01</span>
+          <span class="system-item-text">Deep Aquifer Extraction</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">02</span>
+          <span class="system-item-text">Heliostat Solar Tower + Thermal Storage</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">03</span>
+          <span class="system-item-text">Community Waste Collection System</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">04</span>
+          <span class="system-item-text">Anaerobic Digestion + Biogas Capture</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">05</span>
+          <span class="system-item-text">Pyrolysis Cascade + Energy Recovery</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">06</span>
+          <span class="system-item-text">Three-Stage Water Purification</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">07</span>
+          <span class="system-item-text">Pharmaceutical-Grade Biosecurity</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">08</span>
+          <span class="system-item-text">Integrated Aquaponics + Protein Cascade</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">09</span>
+          <span class="system-item-text">Controlled Environment Crop Production</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">10</span>
+          <span class="system-item-text">SCADA + Starlink Remote Operations</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">11</span>
+          <span class="system-item-text">Village Economic Model + Employment</span>
+          <div class="system-item-dot"></div>
+        </li>
+        <li class="system-item">
+          <span class="system-item-num">12</span>
+          <span class="system-item-text">Standardized Modular Replication</span>
+          <div class="system-item-dot"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <p class="section-label">Contact</p>
+      <h2>Are you an<br><em>Imagineer?</em></h2>
+      <p>Precursus is not looking for everyone. We are looking for the specific mind that reads this page and thinks — not "interesting" — but "I see what they haven't finished yet."</p>
+      <div class="gold-rule"></div>
+      <p>If you are an engineer, scientist, systems thinker, or domain expert whose work has prepared you for a problem at this scale — and if this problem is personal to you — we want to hear from you.</p>
+      <p class="manifesto" style="margin-top: 40px;">"Membership is by invitation only. Earned — not purchased."</p>
+    </div>
+
+    <div class="contact-right">
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="country">Country of Origin</label>
+          <input type="text" id="country" name="country" placeholder="Where you are from">
+        </div>
+        <div class="form-group">
+          <label for="discipline">Primary Discipline</label>
+          <input type="text" id="discipline" name="discipline" placeholder="Engineering, hydrology, agronomy...">
+        </div>
+        <div class="form-group">
+          <label for="message">Why Precursus — and why you</label>
+          <textarea id="message" name="message" placeholder="Tell us what you see that we haven't said. Tell us why this problem is personal." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit Inquiry</button>
+        <p class="form-note">All inquiries are reviewed personally. Responses are not automated. If your message warrants a conversation, you will hear from us directly.<br><br>info@precursus.site</p>
+      </form>
+      <div class="success-msg" id="successMsg">
+        <p>Your inquiry has been received. We read every message. If your mind is what we are looking for, you will hear from us.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Precursus</span>
+  <span class="footer-tagline">We arrive before the light.</span>
+  <span class="footer-copy">&copy; 2026 Precursus &nbsp;·&nbsp; By Invitation Only &nbsp;·&nbsp; NCND Required</span>
+</footer>
+
+<script>
+  // NAV SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // REVEAL ON SCROLL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // FORM SUBMISSION
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const country = document.getElementById('country').value;
+    const discipline = document.getElementById('discipline').value;
+    const message = document.getElementById('message').value;
+
+    const mailto = `mailto:info@precursus.site?subject=Precursus Inquiry — ${encodeURIComponent(name)}&body=${encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nCountry of Origin: ${country}\nDiscipline: ${discipline}\n\nMessage:\n${message}`
+    )}`;
+
+    window.location.href = mailto;
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  });
+</script>
+</body>
+</html>
