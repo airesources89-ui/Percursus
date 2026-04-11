@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Precursus Admin — Blog Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #060F1E;
+  --navy-mid: #0D2040;
+  --navy-card: #0F2647;
+  --amber: #EF9F27;
+  --amber-light: #FAC775;
+  --cream: #FAEEDA;
+  --slate: #1C3F72;
+  --blue-light: #B5D4F4;
+  --muted: #6B7A99;
+  --text: #CBD5E8;
+  --success: #1D9E75;
+  --danger: #E05050;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+}
+
+/* ── LOGIN SCREEN ── */
+#loginScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(239,159,39,0.08) 0%, transparent 70%);
+}
+
+.login-box {
+  background: var(--navy-card);
+  border: 0.5px solid rgba(239,159,39,0.25);
+  border-radius: 6px;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.login-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  color: var(--amber);
+  margin-bottom: 0.5rem;
+}
+
+.login-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.login-input {
+  width: 100%;
+  background: rgba(6,15,30,0.7);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 3px;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 0.15em;
+}
+.login-input:focus { outline: none; border-color: rgba(239,159,39,0.5); }
+
+.btn-login {
+  width: 100%;
+  background: var(--amber);
+  color: var(--navy);
+  border: none;
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-login:hover { background: var(--amber-light); }
+
+.login-error {
+  color: var(--danger);
+  font-size: 0.8rem;
+  margin-top: 0.75rem;
+  display: none;
+}
+
+/* ── MAIN ADMIN ── */
+#adminApp { display: none; }
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(6,15,30,0.97);
+  border-bottom: 0.5px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(8px);
+}
+.nav-logo { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: #fff; }
+.nav-sub { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--amber); text-transform: uppercase; }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.btn-logout {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  background: none;
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 2px;
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-logout:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+
+/* ── DASHBOARD LAYOUT ── */
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--navy-card);
+  border: 0.5px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 1.25rem;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-lbl {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── TWO-COLUMN LAYOUT ── */
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  align-items: start;
+}
+@media(max-width: 900px) {
+  .admin-grid { grid-template-columns: 1fr; }
+}
+
+/* ── SECTION HEADER ── */
+.section-hdr {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.section-hdr::after { content: ''; flex: 1; height: 0.5px; background: rgba(239,159,39,0.15); margin-left: 1rem; }
+
+/* ── POST EDITOR FORM ── */
+.editor-card {
+  background: var(--navy-card);
+  border: 0.5px solid rgba(239,159,39,0.2);
+  border-radius: 4px;
+  padding: 2rem;
+}
+
+.form-group { margin-bottom: 1.25rem; }
+.form-label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: rgba(6,15,30,0.6);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 2px;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.65rem 0.9rem;
+  transition: border-color 0.2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: rgba(239,159,39,0.5);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+
+.form-select option { background: var(--navy-mid); }
+
+.form-textarea {
+  resize: vertical;
+  min-height: 280px;
+  line-height: 1.7;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* Toggle */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.toggle-label { font-size: 0.85rem; color: var(--text); }
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  left: 3px; top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.toggle input:checked + .toggle-slider { background: var(--success); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+/* Buttons */
+.btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 0.65rem 1.5rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.btn-primary { background: var(--amber); color: var(--navy); }
+.btn-primary:hover { background: var(--amber-light); }
+.btn-secondary { background: transparent; color: var(--text); border: 0.5px solid rgba(255,255,255,0.15); }
+.btn-secondary:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+.btn-danger { background: transparent; color: var(--danger); border: 0.5px solid rgba(224,80,80,0.3); }
+.btn-danger:hover { background: rgba(224,80,80,0.1); }
+.btn-success { background: var(--success); color: #fff; }
+
+/* ── POST LIST ── */
+.posts-panel { display: flex; flex-direction: column; gap: 0; }
+
+.post-item {
+  background: var(--navy-card);
+  border: 0.5px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.post-item:hover { border-color: rgba(239,159,39,0.3); }
+.post-item.selected { border-color: rgba(239,159,39,0.6); background: rgba(239,159,39,0.04); }
+
+.post-item-title {
+  font-size: 0.9rem;
+  color: var(--cream);
+  margin-bottom: 0.35rem;
+  font-weight: 400;
+}
+.post-item-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.post-date { font-size: 0.72rem; color: var(--muted); }
+.post-cat {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border: 0.5px solid rgba(181,212,244,0.3);
+  color: var(--blue-light);
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.post-status {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.status-published { background: rgba(29,158,117,0.15); color: var(--success); border: 0.5px solid rgba(29,158,117,0.3); }
+.status-draft { background: rgba(107,122,153,0.15); color: var(--muted); border: 0.5px solid rgba(107,122,153,0.3); }
+
+.no-posts {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  background: var(--navy-card);
+  border: 0.5px dashed rgba(255,255,255,0.06);
+  border-radius: 4px;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  font-size: 0.8rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2px;
+  transition: transform 0.3s;
+  z-index: 999;
+  letter-spacing: 0.05em;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.success { background: var(--success); color: #fff; }
+.toast.error { background: var(--danger); color: #fff; }
+
+/* ── NEW POST BTN ── */
+.btn-new {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 0.9rem;
+  background: rgba(239,159,39,0.1);
+  border: 0.5px solid rgba(239,159,39,0.3);
+  color: var(--amber-light);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: auto;
+}
+.btn-new:hover { background: rgba(239,159,39,0.2); }
+
+/* char counter */
+.char-count { font-size: 0.7rem; color: var(--muted); text-align: right; margin-top: 0.25rem; }
+
+/* Loading */
+.loading { opacity: 0.5; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">PRECURSUS</div>
+    <div class="login-title">Admin Dashboard</div>
+    <input type="password" class="login-input" id="pwInput" placeholder="Enter password" autocomplete="current-password"/>
+    <button class="btn-login" onclick="doLogin()">Enter &rarr;</button>
+    <div class="login-error" id="loginError">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ══ ADMIN APP ══ -->
+<div id="adminApp">
+
+  <nav>
+    <div>
+      <div class="nav-logo">PRECURSUS</div>
+      <div class="nav-sub">Blog Admin</div>
+    </div>
+    <div class="nav-right">
+      <a href="/ai-advisor.html" target="_blank" style="font-size:0.7rem;color:var(--muted);text-decoration:none;letter-spacing:0.1em;">View Site ↗</a>
+      <button class="btn-logout" onclick="doLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="dashboard">
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-num" id="statTotal">—</div>
+        <div class="stat-lbl">Total Posts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statPublished">—</div>
+        <div class="stat-lbl">Published</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statDrafts">—</div>
+        <div class="stat-lbl">Drafts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statWeek">—</div>
+        <div class="stat-lbl">This Week</div>
+      </div>
+    </div>
+
+    <div class="admin-grid">
+
+      <!-- LEFT: Editor -->
+      <div>
+        <div class="section-hdr">
+          <span id="editorMode">New Post</span>
+        </div>
+        <div class="editor-card">
+
+          <div class="form-group">
+            <label class="form-label">Post Title *</label>
+            <input type="text" class="form-input" id="fTitle" placeholder="e.g. How Gulf Coast Restaurants Are Using AI to Cut Food Waste"/>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Publish Date</label>
+              <input type="date" class="form-input" id="fDate"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="fCategory">
+                <option value="AI Strategy">AI Strategy</option>
+                <option value="Getting Started">Getting Started</option>
+                <option value="Cost &amp; ROI">Cost &amp; ROI</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Operations">Operations</option>
+                <option value="Industry Spotlight">Industry Spotlight</option>
+                <option value="Gulf Coast">Gulf Coast</option>
+                <option value="Tools &amp; Resources">Tools &amp; Resources</option>
+                <option value="Case Study">Case Study</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Excerpt <span style="color:var(--muted);font-size:0.65rem;">(shown in blog list — 1–2 sentences)</span></label>
+            <input type="text" class="form-input" id="fExcerpt" placeholder="Brief summary for the blog listing page..."/>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Author</label>
+            <input type="text" class="form-input" id="fAuthor" placeholder="Precursus Think Tank" value="Precursus Think Tank"/>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Full Post Content * <span style="color:var(--muted);font-size:0.65rem;">(plain text or basic HTML)</span></label>
+            <textarea class="form-textarea" id="fContent" placeholder="Write your full blog post here. You can use basic HTML like &lt;p&gt;, &lt;strong&gt;, &lt;h3&gt;, &lt;ul&gt;&lt;li&gt; for formatting." oninput="updateCharCount()"></textarea>
+            <div class="char-count" id="charCount">0 characters</div>
+          </div>
+
+          <div class="toggle-row">
+            <label class="toggle">
+              <input type="checkbox" id="fPublished"/>
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Publish immediately (visible on site)</span>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn btn-primary" id="btnSave" onclick="savePost()">Save Post</button>
+            <button class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+            <button class="btn btn-danger" id="btnDelete" onclick="deletePost()" style="display:none;">Delete Post</button>
+          </div>
+
+          <div id="saveStatus" style="margin-top:1rem;font-size:0.8rem;color:var(--muted);display:none;"></div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT: Post List -->
+      <div>
+        <div class="section-hdr" style="justify-content:space-between;">
+          <span>All Posts</span>
+          <button class="btn-new" onclick="clearForm()">+ New Post</button>
+        </div>
+        <div id="postsList" class="posts-panel">
+          <div class="no-posts">Loading posts...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let adminPassword = '';
+let allPosts = [];
+let editingSlug = null;
+
+// ── LOGIN ──
+function doLogin() {
+  const pw = document.getElementById('pwInput').value;
+  adminPassword = pw;
+  loadPosts().then(ok => {
+    if (ok) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminApp').style.display = 'block';
+      setTodayDate();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      adminPassword = '';
+    }
+  });
+}
+
+document.getElementById('pwInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+function doLogout() {
+  adminPassword = '';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminApp').style.display = 'none';
+  document.getElementById('pwInput').value = '';
+}
+
+// ── SET TODAY'S DATE ──
+function setTodayDate() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('fDate').value = today;
+}
+
+// ── LOAD POSTS ──
+async function loadPosts() {
+  try {
+    const res = await fetch('/api/admin/posts', {
+      headers: { 'X-Admin-Password': adminPassword }
+    });
+    if (res.status === 401) return false;
+    const data = await res.json();
+    allPosts = data.posts || [];
+    renderPostsList();
+    updateStats();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+// ── RENDER POSTS LIST ──
+function renderPostsList() {
+  const container = document.getElementById('postsList');
+  if (!allPosts.length) {
+    container.innerHTML = '<div class="no-posts">No posts yet. Create your first post!</div>';
+    return;
+  }
+
+  container.innerHTML = allPosts.map(p => `
+    <div class="post-item ${editingSlug === p.slug ? 'selected' : ''}" onclick="loadPostIntoEditor('${p.slug}')">
+      <div class="post-item-title">${escHtml(p.title)}</div>
+      <div class="post-item-meta">
+        <span class="post-date">${formatDate(p.date)}</span>
+        <span class="post-cat">${escHtml(p.category)}</span>
+        <span class="post-status ${p.published ? 'status-published' : 'status-draft'}">${p.published ? 'Published' : 'Draft'}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── UPDATE STATS ──
+function updateStats() {
+  const total = allPosts.length;
+  const published = allPosts.filter(p => p.published).length;
+  const drafts = total - published;
+  const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate() - 7);
+  const thisWeek = allPosts.filter(p => new Date(p.date) >= weekAgo).length;
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statPublished').textContent = published;
+  document.getElementById('statDrafts').textContent = drafts;
+  document.getElementById('statWeek').textContent = thisWeek;
+}
+
+// ── LOAD POST INTO EDITOR ──
+function loadPostIntoEditor(slug) {
+  const post = allPosts.find(p => p.slug === slug);
+  if (!post) return;
+
+  editingSlug = slug;
+  document.getElementById('editorMode').textContent = 'Edit Post';
+  document.getElementById('fTitle').value = post.title || '';
+  document.getElementById('fDate').value = post.date || '';
+  document.getElementById('fCategory').value = post.category || 'AI Strategy';
+  document.getElementById('fExcerpt').value = post.excerpt || '';
+  document.getElementById('fAuthor').value = post.author || 'Precursus Think Tank';
+  document.getElementById('fContent').value = post.content || '';
+  document.getElementById('fPublished').checked = !!post.published;
+  document.getElementById('btnDelete').style.display = 'inline-block';
+  document.getElementById('btnSave').textContent = 'Update Post';
+  updateCharCount();
+  renderPostsList();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── CLEAR FORM ──
+function clearForm() {
+  editingSlug = null;
+  document.getElementById('editorMode').textContent = 'New Post';
+  document.getElementById('fTitle').value = '';
+  setTodayDate();
+  document.getElementById('fCategory').value = 'AI Strategy';
+  document.getElementById('fExcerpt').value = '';
+  document.getElementById('fAuthor').value = 'Precursus Think Tank';
+  document.getElementById('fContent').value = '';
+  document.getElementById('fPublished').checked = false;
+  document.getElementById('btnDelete').style.display = 'none';
+  document.getElementById('btnSave').textContent = 'Save Post';
+  document.getElementById('saveStatus').style.display = 'none';
+  updateCharCount();
+  renderPostsList();
+}
+
+// ── SAVE POST ──
+async function savePost() {
+  const title = document.getElementById('fTitle').value.trim();
+  const content = document.getElementById('fContent').value.trim();
+
+  if (!title) { showToast('Title is required.', 'error'); return; }
+  if (!content) { showToast('Content is required.', 'error'); return; }
+
+  const payload = {
+    title,
+    date: document.getElementById('fDate').value || new Date().toISOString().split('T')[0],
+    category: document.getElementById('fCategory').value,
+    excerpt: document.getElementById('fExcerpt').value.trim() || content.substring(0, 160) + '...',
+    author: document.getElementById('fAuthor').value.trim() || 'Precursus Think Tank',
+    content,
+    published: document.getElementById('fPublished').checked,
+  };
+
+  const btn = document.getElementById('btnSave');
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+
+  try {
+    const url = editingSlug ? `/api/admin/posts/${editingSlug}` : '/api/admin/posts';
+    const method = editingSlug ? 'PUT' : 'POST';
+
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': adminPassword },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      showToast(editingSlug ? 'Post updated!' : 'Post created!', 'success');
+      await loadPosts();
+      if (!editingSlug && data.slug) {
+        editingSlug = data.slug;
+        document.getElementById('editorMode').textContent = 'Edit Post';
+        document.getElementById('btnDelete').style.display = 'inline-block';
+        btn.textContent = 'Update Post';
+      }
+    } else {
+      showToast('Save failed. Try again.', 'error');
+    }
+  } catch (e) {
+    showToast('Connection error.', 'error');
+  } finally {
+    btn.disabled = false;
+    if (btn.textContent === 'Saving...') btn.textContent = editingSlug ? 'Update Post' : 'Save Post';
+  }
+}
+
+// ── DELETE POST ──
+async function deletePost() {
+  if (!editingSlug) return;
+  if (!confirm('Delete this post permanently? This cannot be undone.')) return;
+
+  try {
+    const res = await fetch(`/api/admin/posts/${editingSlug}`, {
+      method: 'DELETE',
+      headers: { 'X-Admin-Password': adminPassword },
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('Post deleted.', 'success');
+      clearForm();
+      await loadPosts();
+    } else {
+      showToast('Delete failed.', 'error');
+    }
+  } catch (e) {
+    showToast('Connection error.', 'error');
+  }
+}
+
+// ── HELPERS ──
+function updateCharCount() {
+  const len = document.getElementById('fContent').value.length;
+  document.getElementById('charCount').textContent = len.toLocaleString() + ' characters';
+}
+
+function formatDate(d) {
+  if (!d) return '';
+  const dt = new Date(d + 'T12:00:00');
+  return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>
