@@ -165,7 +165,6 @@ nav {
 .ask-textarea:focus { outline:none; border-color:rgba(239,159,39,0.5); }
 .ask-textarea::placeholder { color:var(--muted); }
 
-/* Email gate */
 .email-gate {
   margin-top:1rem;
   display:flex;
@@ -213,7 +212,6 @@ nav {
 .btn-ask:active { transform:scale(0.98); }
 .btn-ask:disabled { opacity:0.5; cursor:not-allowed; }
 
-/* AI Answer display */
 .answer-box {
   display:none;
   margin-top:1.5rem;
@@ -243,32 +241,12 @@ nav {
   animation:pulse 2s infinite;
 }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-.answer-text {
-  font-size:0.9rem;
-  line-height:1.85;
-  color:var(--cream);
-}
-.answer-disclaimer {
-  margin-top:1rem;
-  font-size:0.72rem;
-  color:var(--muted);
-  font-style:italic;
-}
+.answer-text { font-size:0.9rem; line-height:1.85; color:var(--cream); }
+.answer-disclaimer { margin-top:1rem; font-size:0.72rem; color:var(--muted); font-style:italic; }
 
-/* Loading state */
-.loading-dots {
-  display:none;
-  gap:6px;
-  margin-top:1rem;
-  align-items:center;
-}
+.loading-dots { display:none; gap:6px; margin-top:1rem; align-items:center; }
 .loading-dots.visible { display:flex; }
-.loading-dots span {
-  width:6px; height:6px;
-  border-radius:50%;
-  background:var(--amber);
-  animation:bounce 1.2s infinite;
-}
+.loading-dots span { width:6px; height:6px; border-radius:50%; background:var(--amber); animation:bounce 1.2s infinite; }
 .loading-dots span:nth-child(2) { animation-delay:0.2s; }
 .loading-dots span:nth-child(3) { animation-delay:0.4s; }
 @keyframes bounce { 0%,60%,100%{transform:translateY(0);} 30%{transform:translateY(-8px);} }
@@ -288,182 +266,90 @@ nav {
 }
 .faq-header::after { content:''; flex:1; height:0.5px; background:rgba(239,159,39,0.2); }
 
-.faq-categories {
-  display:flex;
-  flex-wrap:wrap;
-  gap:0.5rem;
-  margin-bottom:1.5rem;
-}
+.faq-categories { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.5rem; }
 .cat-btn {
-  font-size:0.7rem;
-  letter-spacing:0.08em;
-  padding:0.4rem 1rem;
-  border:0.5px solid rgba(255,255,255,0.1);
-  background:transparent;
-  color:var(--muted);
-  border-radius:2px;
-  cursor:pointer;
-  transition:all 0.2s;
+  font-size:0.7rem; letter-spacing:0.08em; padding:0.4rem 1rem;
+  border:0.5px solid rgba(255,255,255,0.1); background:transparent;
+  color:var(--muted); border-radius:2px; cursor:pointer; transition:all 0.2s;
 }
-.cat-btn:hover, .cat-btn.active {
-  border-color:var(--amber);
-  color:var(--amber-light);
-  background:rgba(239,159,39,0.06);
-}
+.cat-btn:hover, .cat-btn.active { border-color:var(--amber); color:var(--amber-light); background:rgba(239,159,39,0.06); }
 
 .faq-list { display:flex; flex-direction:column; gap:0.75rem; }
-
-.faq-item {
-  background:var(--navy-card);
-  border:0.5px solid rgba(255,255,255,0.06);
-  border-radius:4px;
-  overflow:hidden;
-  transition:border-color 0.2s;
-}
+.faq-item { background:var(--navy-card); border:0.5px solid rgba(255,255,255,0.06); border-radius:4px; overflow:hidden; transition:border-color 0.2s; }
 .faq-item:hover { border-color:rgba(239,159,39,0.2); }
-
 .faq-question {
-  width:100%;
-  background:transparent;
-  border:none;
-  color:var(--cream);
-  font-family:'DM Sans',sans-serif;
-  font-size:0.9rem;
-  font-weight:400;
-  text-align:left;
-  padding:1.1rem 1.25rem;
-  cursor:pointer;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:1rem;
-  transition:color 0.2s;
+  width:100%; background:transparent; border:none; color:var(--cream);
+  font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:400;
+  text-align:left; padding:1.1rem 1.25rem; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  gap:1rem; transition:color 0.2s;
 }
 .faq-question:hover { color:#fff; }
-.faq-question .chevron {
-  font-size:0.7rem;
-  color:var(--muted);
-  transition:transform 0.3s;
-  flex-shrink:0;
-}
+.faq-question .chevron { font-size:0.7rem; color:var(--muted); transition:transform 0.3s; flex-shrink:0; }
 .faq-item.open .chevron { transform:rotate(180deg); }
 .faq-item.open .faq-question { color:var(--amber-light); }
-
-.faq-answer {
-  max-height:0;
-  overflow:hidden;
-  transition:max-height 0.4s ease;
-}
+.faq-answer { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
 .faq-answer-inner {
-  padding:0 1.25rem 1.25rem;
-  font-size:0.85rem;
-  line-height:1.85;
-  color:var(--muted);
-  border-top:0.5px solid rgba(255,255,255,0.05);
-  padding-top:1rem;
+  padding:0 1.25rem 1.25rem; font-size:0.85rem; line-height:1.85;
+  color:var(--muted); border-top:0.5px solid rgba(255,255,255,0.05); padding-top:1rem;
 }
 .faq-item.open .faq-answer { max-height:600px; }
-
-/* Affiliate link style */
-.affiliate-link {
-  color:var(--amber-light);
-  text-decoration:none;
-  border-bottom:0.5px solid rgba(250,199,117,0.3);
-  transition:border-color 0.2s;
-}
+.affiliate-link { color:var(--amber-light); text-decoration:none; border-bottom:0.5px solid rgba(250,199,117,0.3); transition:border-color 0.2s; }
 .affiliate-link:hover { border-color:var(--amber-light); }
+
+/* ── BLOG SECTION ── */
+.blog-section { margin-top: 3rem; padding-top: 2rem; border-top: 0.5px solid rgba(239,159,39,0.12); }
+.blog-section-hdr { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; color: var(--amber); text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 1rem; }
+.blog-section-hdr::after { content: ''; flex: 1; height: 0.5px; background: rgba(239,159,39,0.2); }
+.blog-section-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+.blog-card { background: var(--navy-card); border: 0.5px solid rgba(255,255,255,0.06); border-radius: 4px; padding: 1.5rem; cursor: pointer; transition: border-color 0.25s, transform 0.2s; display: flex; flex-direction: column; }
+.blog-card:hover { border-color: rgba(239,159,39,0.3); transform: translateY(-2px); }
+.blog-card-cat { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.65rem; }
+.blog-card-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.05rem; font-weight: 600; color: var(--cream); line-height: 1.4; margin-bottom: 0.75rem; }
+.blog-card-excerpt { font-size: 0.8rem; color: var(--muted); line-height: 1.75; flex: 1; margin-bottom: 1rem; }
+.blog-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(107,122,153,0.6); border-top: 0.5px solid rgba(255,255,255,0.04); padding-top: 0.75rem; margin-top: auto; }
+.blog-card-read { color: var(--amber-light); font-size: 0.72rem; letter-spacing: 0.08em; }
+.blog-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(6,15,30,0.92); z-index: 200; overflow-y: auto; backdrop-filter: blur(4px); }
+.blog-modal-overlay.open { display: block; }
+.blog-modal { max-width: 720px; margin: 3rem auto; background: var(--navy-card); border: 0.5px solid rgba(239,159,39,0.2); border-radius: 6px; padding: 3rem; position: relative; }
+@media(max-width: 768px) { .blog-modal { margin: 1rem; padding: 1.75rem; } }
+.blog-modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: pointer; transition: color 0.2s; line-height: 1; }
+.blog-modal-close:hover { color: #fff; }
+.blog-modal-cat { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
+.blog-modal-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; color: #fff; line-height: 1.25; margin-bottom: 1rem; }
+.blog-modal-meta { font-size: 0.75rem; color: var(--muted); margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(255,255,255,0.06); }
+.blog-modal-body { font-size: 0.92rem; line-height: 1.9; color: var(--text); }
+.blog-modal-body p { margin-bottom: 1.25rem; }
+.blog-modal-body h3 { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--amber); text-transform: uppercase; margin: 1.75rem 0 0.75rem; }
+.blog-modal-body strong { color: var(--cream); font-weight: 500; }
+.blog-modal-body ul { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+.blog-modal-body li { margin-bottom: 0.5rem; }
+.blog-empty { text-align: center; padding: 3rem 1rem; color: var(--muted); font-size: 0.85rem; background: var(--navy-card); border: 0.5px dashed rgba(255,255,255,0.06); border-radius: 4px; }
+.btn-load-more { background: transparent; border: 0.5px solid rgba(239,159,39,0.3); color: var(--amber-light); font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; padding: 0.65rem 2rem; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+.btn-load-more:hover { background: rgba(239,159,39,0.08); }
 
 /* ── SIDEBAR ── */
 .sidebar { display:flex; flex-direction:column; gap:1.5rem; }
-
-.sidebar-card {
-  background:var(--navy-card);
-  border:0.5px solid rgba(255,255,255,0.06);
-  border-radius:4px;
-  padding:1.5rem;
-}
-.sidebar-title {
-  font-family:'Cinzel',serif;
-  font-size:0.6rem;
-  letter-spacing:0.35em;
-  color:var(--amber);
-  text-transform:uppercase;
-  margin-bottom:1rem;
-}
-
-/* Ad placeholder */
-.ad-placeholder {
-  background:rgba(6,15,30,0.5);
-  border:0.5px dashed rgba(255,255,255,0.08);
-  border-radius:2px;
-  height:250px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:0.65rem;
-  color:rgba(107,122,153,0.4);
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-}
-
-.stat-row {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0.6rem 0;
-  border-bottom:0.5px solid rgba(255,255,255,0.04);
-  font-size:0.8rem;
-}
+.sidebar-card { background:var(--navy-card); border:0.5px solid rgba(255,255,255,0.06); border-radius:4px; padding:1.5rem; }
+.sidebar-title { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.35em; color:var(--amber); text-transform:uppercase; margin-bottom:1rem; }
+.ad-placeholder { background:rgba(6,15,30,0.5); border:0.5px dashed rgba(255,255,255,0.08); border-radius:2px; height:250px; display:flex; align-items:center; justify-content:center; font-size:0.65rem; color:rgba(107,122,153,0.4); letter-spacing:0.1em; text-transform:uppercase; }
+.stat-row { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0; border-bottom:0.5px solid rgba(255,255,255,0.04); font-size:0.8rem; }
 .stat-row:last-child { border-bottom:none; }
 .stat-label { color:var(--muted); }
 .stat-val { color:var(--cream); font-weight:500; }
-
-.topic-pill {
-  display:inline-block;
-  font-size:0.7rem;
-  padding:0.3rem 0.75rem;
-  background:rgba(28,63,114,0.4);
-  border:0.5px solid rgba(28,63,114,0.6);
-  border-radius:2px;
-  color:var(--blue-light);
-  margin:0.25rem;
-  cursor:pointer;
-  transition:all 0.2s;
-}
-.topic-pill:hover {
-  background:rgba(239,159,39,0.1);
-  border-color:rgba(239,159,39,0.3);
-  color:var(--amber-light);
-}
+.topic-pill { display:inline-block; font-size:0.7rem; padding:0.3rem 0.75rem; background:rgba(28,63,114,0.4); border:0.5px solid rgba(28,63,114,0.6); border-radius:2px; color:var(--blue-light); margin:0.25rem; cursor:pointer; transition:all 0.2s; }
+.topic-pill:hover { background:rgba(239,159,39,0.1); border-color:rgba(239,159,39,0.3); color:var(--amber-light); }
 
 /* ── FOOTER ── */
-footer {
-  border-top:0.5px solid rgba(255,255,255,0.06);
-  padding:2rem;
-  text-align:center;
-  margin-top:4rem;
-}
+footer { border-top:0.5px solid rgba(255,255,255,0.06); padding:2rem; text-align:center; margin-top:4rem; }
 .footer-logo { font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.4em; color:var(--muted); margin-bottom:0.75rem; }
 .footer-note { font-size:0.72rem; color:rgba(107,122,153,0.4); }
 .footer-links { display:flex; justify-content:center; gap:2rem; margin-top:1rem; flex-wrap:wrap; }
 .footer-links a { font-size:0.7rem; color:var(--muted); text-decoration:none; letter-spacing:0.1em; transition:color 0.2s; }
 .footer-links a:hover { color:var(--amber-light); }
 
-/* Toast */
-.toast {
-  position:fixed;
-  bottom:2rem;
-  left:50%;
-  transform:translateX(-50%) translateY(100px);
-  background:var(--success);
-  color:#fff;
-  font-size:0.8rem;
-  padding:0.75rem 1.5rem;
-  border-radius:2px;
-  transition:transform 0.3s;
-  z-index:999;
-  letter-spacing:0.05em;
-}
+.toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(100px); background:var(--success); color:#fff; font-size:0.8rem; padding:0.75rem 1.5rem; border-radius:2px; transition:transform 0.3s; z-index:999; letter-spacing:0.05em; }
 .toast.show { transform:translateX(-50%) translateY(0); }
 </style>
 </head>
@@ -474,7 +360,6 @@ footer {
   <a href="/" class="nav-back">&larr; Think Tank Home</a>
 </nav>
 
-<!-- Hero -->
 <div class="hero-strip">
   <div class="hero-eyebrow">A Precursus Initiative</div>
   <h1 class="hero-title">Gulf Coast AI Business Advisor</h1>
@@ -490,25 +375,21 @@ footer {
 
 <div class="page-body">
 
-  <!-- MAIN COLUMN -->
   <main>
 
     <!-- ASK AI BOX -->
     <div class="ask-box">
       <div class="ask-label">Ask the AI Advisor</div>
       <textarea class="ask-textarea" id="questionInput" placeholder="Example: Can AI answer my phones after hours? How much does it cost to add AI to my restaurant? What's the easiest AI tool for a landscaping company?"></textarea>
-
       <div class="email-gate">
         <div class="gate-note">Enter your email to receive your answer.<br><span>We respect your privacy — no spam, ever.</span></div>
         <input type="email" class="email-input" id="emailInput" placeholder="your@email.com"/>
         <button class="btn-ask" id="askBtn" onclick="submitQuestion()">Get Answer &rarr;</button>
       </div>
-
       <div class="loading-dots" id="loadingDots">
         <span></span><span></span><span></span>
         <span style="font-size:0.75rem;color:var(--muted);margin-left:0.5rem;">Consulting the advisor...</span>
       </div>
-
       <div class="answer-box" id="answerBox">
         <div class="answer-header">Precursus AI Advisor</div>
         <div class="answer-text" id="answerText"></div>
@@ -519,7 +400,6 @@ footer {
     <!-- FAQ SECTION -->
     <div class="faq-section">
       <div class="faq-header">Frequently Asked Questions</div>
-
       <div class="faq-categories">
         <button class="cat-btn active" onclick="filterFAQ('all', this)">All Topics</button>
         <button class="cat-btn" onclick="filterFAQ('getting-started', this)">Getting Started</button>
@@ -532,390 +412,180 @@ footer {
         <button class="cat-btn" onclick="filterFAQ('implementation', this)">Implementation</button>
         <button class="cat-btn" onclick="filterFAQ('advanced', this)">Advanced</button>
       </div>
-
       <div class="faq-list" id="faqList">
 
         <div class="faq-item" data-category="getting-started" data-id="faq-1">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>What is AI and how can it actually help my small business?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              AI — artificial intelligence — is software that can understand language, analyze data, and automate tasks that used to require a human. For a small business on the Gulf Coast, this means practical things: answering customer phone calls at midnight, automatically sending follow-up texts after a job, writing social media posts in seconds, or sorting customer emails by urgency. You don't need a tech degree. Most AI tools today are as easy to use as a smartphone app. The best starting point is identifying the one task in your business that wastes the most time — chances are, AI can handle it.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>What is AI and how can it actually help my small business?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">AI — artificial intelligence — is software that can understand language, analyze data, and automate tasks that used to require a human. For a small business on the Gulf Coast, this means practical things: answering customer phone calls at midnight, automatically sending follow-up texts after a job, writing social media posts in seconds, or sorting customer emails by urgency. You don't need a tech degree. Most AI tools today are as easy to use as a smartphone app. The best starting point is identifying the one task in your business that wastes the most time — chances are, AI can handle it.</div></div>
         </div>
 
         <div class="faq-item" data-category="getting-started" data-id="faq-2">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>I'm not tech-savvy at all. Can I still use AI in my business?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Absolutely. The most powerful AI tools today require zero coding knowledge. Tools like <a href="https://workspace.google.com/intl/en/lp/business/" class="affiliate-link" target="_blank">Google Workspace</a> now have AI built in — it drafts your emails, summarizes documents, and generates reports automatically. If you can type a question into Google, you can use AI. Many local business owners in Mississippi are already using AI to handle after-hours calls and appointment reminders without knowing anything about how it works under the hood.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>I'm not tech-savvy at all. Can I still use AI in my business?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Absolutely. The most powerful AI tools today require zero coding knowledge. Tools like <a href="https://workspace.google.com/intl/en/lp/business/" class="affiliate-link" target="_blank">Google Workspace</a> now have AI built in — it drafts your emails, summarizes documents, and generates reports automatically. If you can type a question into Google, you can use AI. Many local business owners in Mississippi are already using AI to handle after-hours calls and appointment reminders without knowing anything about how it works under the hood.</div></div>
         </div>
 
         <div class="faq-item" data-category="cost" data-id="faq-3">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How much does it cost to add AI to my business?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Costs range from $0 to several hundred dollars per month depending on what you want. Many AI tools have free tiers that are genuinely useful for small businesses. A full AI-powered website with automated phone answering, online booking, and customer follow-up runs roughly $99–$218 per month through platforms built specifically for local businesses. Compare that to a part-time employee handling the same tasks at $1,500+ per month, and the ROI is clear. Start with one tool, see the value, then expand.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How much does it cost to add AI to my business?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Costs range from $0 to several hundred dollars per month depending on what you want. Many AI tools have free tiers that are genuinely useful for small businesses. A full AI-powered website with automated phone answering, online booking, and customer follow-up runs roughly $99–$218 per month through platforms built specifically for local businesses. Compare that to a part-time employee handling the same tasks at $1,500+ per month, and the ROI is clear. Start with one tool, see the value, then expand.</div></div>
         </div>
 
         <div class="faq-item" data-category="operations" data-id="faq-4">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Can AI answer my business phone calls when I'm unavailable?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes — and this is one of the highest-value AI applications for local service businesses. An AI phone system can answer calls 24/7, collect caller information, answer common questions, book appointments, and send you a summary via text. For a plumber, HVAC company, restaurant, or any business that misses calls after hours, this alone can recover thousands of dollars in lost revenue per month. Setup typically takes less than a day through modern platforms.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Can AI answer my business phone calls when I'm unavailable?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes — and this is one of the highest-value AI applications for local service businesses. An AI phone system can answer calls 24/7, collect caller information, answer common questions, book appointments, and send you a summary via text. For a plumber, HVAC company, restaurant, or any business that misses calls after hours, this alone can recover thousands of dollars in lost revenue per month. Setup typically takes less than a day through modern platforms.</div></div>
         </div>
 
         <div class="faq-item" data-category="marketing" data-id="faq-5">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Can AI help me with social media and marketing?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              This is where AI shines for small businesses. Tools like <a href="https://www.canva.com" class="affiliate-link" target="_blank">Canva's AI</a> can create professional social media graphics in minutes. AI writing tools can draft a month's worth of Facebook posts in under an hour. Some platforms can automatically post on a scheduled calendar across Facebook, Instagram, and Google Business. For Gulf Coast businesses targeting locals, this means staying top-of-mind without spending hours per week on content creation.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Can AI help me with social media and marketing?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">This is where AI shines for small businesses. Tools like <a href="https://www.canva.com" class="affiliate-link" target="_blank">Canva's AI</a> can create professional social media graphics in minutes. AI writing tools can draft a month's worth of Facebook posts in under an hour. Some platforms can automatically post on a scheduled calendar across Facebook, Instagram, and Google Business. For Gulf Coast businesses targeting locals, this means staying top-of-mind without spending hours per week on content creation.</div></div>
         </div>
 
         <div class="faq-item" data-category="operations" data-id="faq-6">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How can a restaurant or food service business use AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Restaurants are seeing major efficiency gains from AI in several areas: online reservation and waitlist management, automated review responses, loyalty program management, menu description writing, and social media content. Some restaurants use AI to analyze peak hour patterns and adjust staffing schedules automatically. For Gulf Coast seafood restaurants and casual dining, AI can also help manage seasonal menu changes and local event promotions without needing a full-time marketing person.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How can a restaurant or food service business use AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Restaurants are seeing major efficiency gains from AI in several areas: online reservation and waitlist management, automated review responses, loyalty program management, menu description writing, and social media content. Some restaurants use AI to analyze peak hour patterns and adjust staffing schedules automatically. For Gulf Coast seafood restaurants and casual dining, AI can also help manage seasonal menu changes and local event promotions without needing a full-time marketing person.</div></div>
         </div>
 
         <div class="faq-item" data-category="tools" data-id="faq-7">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>What are the best free AI tools to start with?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Five free tools worth exploring right now: (1) <strong>ChatGPT free tier</strong> — write anything: emails, ads, proposals, job postings. (2) <strong>Google Gemini</strong> — integrated into Gmail and Google Docs if you use Google Workspace. (3) <strong>Canva free tier</strong> — AI-powered design for social media. (4) <strong>Tidio</strong> — free AI chat widget for your website. (5) <strong>Mailchimp free tier</strong> — AI-assisted email marketing for up to 500 contacts. Start with one, get comfortable, then add the next.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>What are the best free AI tools to start with?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Five free tools worth exploring right now: (1) <strong>ChatGPT free tier</strong> — write anything: emails, ads, proposals, job postings. (2) <strong>Google Gemini</strong> — integrated into Gmail and Google Docs if you use Google Workspace. (3) <strong>Canva free tier</strong> — AI-powered design for social media. (4) <strong>Tidio</strong> — free AI chat widget for your website. (5) <strong>Mailchimp free tier</strong> — AI-assisted email marketing for up to 500 contacts. Start with one, get comfortable, then add the next.</div></div>
         </div>
 
         <div class="faq-item" data-category="getting-started" data-id="faq-8">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Is AI safe for my customer data and business information?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              A fair concern — and the answer depends on the tool. Established platforms like Google, Microsoft, and major AI vendors have robust data security. The risk comes from using unknown or unvetted tools with sensitive information. Best practices: never paste real customer Social Security numbers, credit card data, or HIPAA-protected health information into a general AI tool. For business strategy, marketing, and operations questions, major AI tools are perfectly safe. When in doubt, read the privacy policy or ask the vendor directly.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Is AI safe for my customer data and business information?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">A fair concern — and the answer depends on the tool. Established platforms like Google, Microsoft, and major AI vendors have robust data security. The risk comes from using unknown or unvetted tools with sensitive information. Best practices: never paste real customer Social Security numbers, credit card data, or HIPAA-protected health information into a general AI tool. For business strategy, marketing, and operations questions, major AI tools are perfectly safe. When in doubt, read the privacy policy or ask the vendor directly.</div></div>
         </div>
 
         <div class="faq-item" data-category="cost" data-id="faq-9">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Will AI replace my employees?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              For the vast majority of Gulf Coast small businesses, no. AI handles repetitive, time-consuming tasks — freeing your team to focus on the work that actually requires a human: relationships, craftsmanship, judgment calls, and customer experience. Think of AI as adding a tireless assistant who handles the administrative burden. Most business owners who adopt AI report that it lets their existing team do more, not that it eliminates the need for people.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Will AI replace my employees?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">For the vast majority of Gulf Coast small businesses, no. AI handles repetitive, time-consuming tasks — freeing your team to focus on the work that actually requires a human: relationships, craftsmanship, judgment calls, and customer experience. Think of AI as adding a tireless assistant who handles the administrative burden. Most business owners who adopt AI report that it lets their existing team do more, not that it eliminates the need for people.</div></div>
         </div>
 
         <div class="faq-item" data-category="marketing" data-id="faq-10">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How do I get my business to show up better on Google using AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              AI can dramatically improve your local Google presence in a few ways. First, use AI writing tools to create rich, keyword-optimized descriptions for your Google Business Profile. Second, use AI to generate and post consistent content — Google rewards active businesses. Third, AI tools can help you respond to every Google review in a personalized way within minutes, which improves your ranking and reputation. Finally, AI-powered website builders ensure your site is structured correctly for local search — a major factor in appearing when someone in Bay St. Louis or Gulfport searches for your service.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How do I get my business to show up better on Google using AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">AI can dramatically improve your local Google presence in a few ways. First, use AI writing tools to create rich, keyword-optimized descriptions for your Google Business Profile. Second, use AI to generate and post consistent content — Google rewards active businesses. Third, AI tools can help you respond to every Google review in a personalized way within minutes, which improves your ranking and reputation. Finally, AI-powered website builders ensure your site is structured correctly for local search — a major factor in appearing when someone in Bay St. Louis or Gulfport searches for your service.</div></div>
         </div>
 
-        <!-- INDUSTRY SPECIFIC -->
         <div class="faq-item" data-category="industry" data-id="faq-11">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How can contractors and tradespeople use AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Contractors — plumbers, electricians, HVAC techs, roofers — are seeing huge returns from AI in three areas. First, AI-powered phone systems capture every lead even when you're on a job site, automatically qualifying the caller and booking an estimate. Second, AI can generate professional estimates and proposals in minutes based on job type and square footage. Third, automated follow-up texts and review requests after job completion build the Google reputation that drives the next customer. For Gulf Coast contractors who live and die by storm season, AI can also help manage surge demand — routing calls, prioritizing emergency jobs, and keeping customers informed automatically.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How can contractors and tradespeople use AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Contractors — plumbers, electricians, HVAC techs, roofers — are seeing huge returns from AI in three areas. First, AI-powered phone systems capture every lead even when you're on a job site, automatically qualifying the caller and booking an estimate. Second, AI can generate professional estimates and proposals in minutes based on job type and square footage. Third, automated follow-up texts and review requests after job completion build the Google reputation that drives the next customer. For Gulf Coast contractors who live and die by storm season, AI can also help manage surge demand — routing calls, prioritizing emergency jobs, and keeping customers informed automatically.</div></div>
         </div>
 
         <div class="faq-item" data-category="industry" data-id="faq-12">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Can healthcare and medical practices use AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes — with important guardrails. Medical and dental practices are using AI for appointment reminders and scheduling, patient follow-up communications, insurance verification pre-screening, and generating educational content for patients. AI chatbots can handle common questions (hours, directions, insurance accepted) without staff involvement. Critical note: any AI tool handling actual patient health information must be HIPAA-compliant. Stick to reputable healthcare-specific platforms rather than general consumer AI tools for anything touching patient data. For Gulf Coast practices, AI can also help manage the surge in patients after hurricane events when staff is stretched thin.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Can healthcare and medical practices use AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes — with important guardrails. Medical and dental practices are using AI for appointment reminders and scheduling, patient follow-up communications, insurance verification pre-screening, and generating educational content for patients. AI chatbots can handle common questions (hours, directions, insurance accepted) without staff involvement. Critical note: any AI tool handling actual patient health information must be HIPAA-compliant. Stick to reputable healthcare-specific platforms rather than general consumer AI tools for anything touching patient data.</div></div>
         </div>
 
         <div class="faq-item" data-category="industry" data-id="faq-13">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How can lawyers and legal professionals use AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Law firms are among the fastest AI adopters for good reason — the ROI is enormous. AI can draft routine documents (letters, standard agreements, intake forms), summarize lengthy case documents in minutes, research legal precedents, and generate first drafts of briefs for attorney review. For client-facing operations, AI handles after-hours intake calls, appointment scheduling, and FAQ responses. Mississippi attorneys should note that bar association ethics rules require human review of all AI-generated legal work — AI is the assistant, not the attorney. Solo practitioners and small firms especially benefit because AI levels the playing field against larger firms.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How can lawyers and legal professionals use AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Law firms are among the fastest AI adopters for good reason — the ROI is enormous. AI can draft routine documents, summarize lengthy case files in minutes, research legal precedents, and generate first drafts of briefs for attorney review. For client-facing operations, AI handles after-hours intake calls, appointment scheduling, and FAQ responses. Mississippi attorneys should note that bar association ethics rules require human review of all AI-generated legal work — AI is the assistant, not the attorney.</div></div>
         </div>
 
         <div class="faq-item" data-category="industry" data-id="faq-14">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>What can AI do for retail stores on the Gulf Coast?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Retail businesses are using AI in several high-impact ways. Inventory management AI predicts what to stock based on season, local events, and historical patterns — critical for Gulf Coast retailers managing tourist season swings. AI-powered product descriptions and ad copy save hours per week. Customer segmentation tools identify your best buyers and suggest targeted promotions. For stores with an online presence, AI chatbots handle product questions and order status inquiries 24/7. Loyalty program AI identifies customers at risk of churning and triggers personalized win-back offers automatically.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>What can AI do for retail stores on the Gulf Coast?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Retail businesses are using AI in several high-impact ways. Inventory management AI predicts what to stock based on season, local events, and historical patterns — critical for Gulf Coast retailers managing tourist season swings. AI-powered product descriptions and ad copy save hours per week. Customer segmentation tools identify your best buyers and suggest targeted promotions. For stores with an online presence, AI chatbots handle product questions and order status inquiries 24/7.</div></div>
         </div>
 
         <div class="faq-item" data-category="industry" data-id="faq-15">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How can tourism and hospitality businesses use AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Tourism is one of the biggest AI opportunity areas on the Gulf Coast. Hotels, vacation rentals, tour operators, and charter fishing businesses use AI for dynamic pricing (adjusting rates based on demand and season), automated guest messaging before and after stays, review management, and multilingual customer service for international visitors. AI can generate compelling property descriptions, respond to booking inquiries instantly, and flag maintenance issues from guest feedback before they become bad reviews. For Biloxi casino properties and Bay St. Louis waterfront businesses, AI-powered upsell recommendations during the booking process can meaningfully increase revenue per guest.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How can tourism and hospitality businesses use AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Tourism is one of the biggest AI opportunity areas on the Gulf Coast. Hotels, vacation rentals, tour operators, and charter fishing businesses use AI for dynamic pricing, automated guest messaging, review management, and multilingual customer service. AI can generate compelling property descriptions, respond to booking inquiries instantly, and flag maintenance issues from guest feedback before they become bad reviews. For Bay St. Louis waterfront businesses, AI-powered upsell recommendations during booking can meaningfully increase revenue per guest.</div></div>
         </div>
 
         <div class="faq-item" data-category="industry" data-id="faq-16">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Can fishing charters and marine businesses use AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Absolutely — and it's still early enough that Gulf Coast marine businesses can get ahead of competitors. Charter fishing operations use AI for automated booking and deposit collection, weather-related rescheduling communications, and post-trip photo sharing and review requests. Some captains use AI writing tools to generate compelling trip reports and social media content that drives repeat bookings. Marine supply and boat repair businesses use AI for parts inventory management and automated follow-up with customers whose vessels are due for service. The barrier to entry is low — most of this runs through standard booking and communication platforms that have AI built in.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Can fishing charters and marine businesses use AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Absolutely — and it's still early enough that Gulf Coast marine businesses can get ahead of competitors. Charter fishing operations use AI for automated booking and deposit collection, weather-related rescheduling communications, and post-trip review requests. Some captains use AI writing tools to generate compelling trip reports and social media content that drives repeat bookings. Marine supply and boat repair businesses use AI for parts inventory management and automated follow-up with customers whose vessels are due for service.</div></div>
         </div>
 
         <div class="faq-item" data-category="industry" data-id="faq-17">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How can agriculture and farming operations use AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Mississippi agriculture is seeing AI adoption in precision farming, crop monitoring, and market timing. For smaller operations — farmers markets, microgreens, specialty mushrooms, aquaponics — AI helps with demand forecasting, subscription box management, and customer communications. AI-powered social media content lets small farm operations punch above their weight in marketing, building the loyal customer base that makes direct-to-consumer models work. For regenerative agriculture operations, AI can also help document and report on sustainability metrics increasingly required by premium buyers and grant programs.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How can agriculture and farming operations use AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Mississippi agriculture is seeing AI adoption in precision farming, crop monitoring, and market timing. For smaller operations — farmers markets, microgreens, specialty mushrooms, aquaponics — AI helps with demand forecasting, subscription box management, and customer communications. AI-powered social media content lets small farm operations punch above their weight in marketing. For regenerative agriculture operations, AI can also help document and report on sustainability metrics increasingly required by premium buyers and grant programs.</div></div>
         </div>
 
-        <!-- GULF COAST SPECIFIC -->
         <div class="faq-item" data-category="gulf-coast" data-id="faq-18">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How can AI help my business prepare for and recover from hurricanes?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Hurricane preparedness is a real competitive advantage on the Gulf Coast, and AI helps in multiple ways. Before a storm: AI communication tools can blast updates to your entire customer list instantly — closures, hours changes, safety information. During recovery: AI phone systems handle the surge in calls when you're short-staffed and overwhelmed. After the storm: AI-assisted damage documentation and insurance claim writing saves time and improves outcomes. Year-round: AI can help you maintain an updated business continuity plan, automatically flagging when key documents need reviewing. Businesses that communicate well during disasters build lasting customer loyalty.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How can AI help my business prepare for and recover from hurricanes?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Hurricane preparedness is a real competitive advantage on the Gulf Coast, and AI helps in multiple ways. Before a storm: AI communication tools can blast updates to your entire customer list instantly. During recovery: AI phone systems handle the surge in calls when you're short-staffed. After the storm: AI-assisted damage documentation and insurance claim writing saves time and improves outcomes. Businesses that communicate well during disasters build lasting customer loyalty.</div></div>
         </div>
 
         <div class="faq-item" data-category="gulf-coast" data-id="faq-19">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How do I handle the tourist season swings with AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Seasonal swings are one of the biggest operational challenges for Gulf Coast businesses, and AI is well-suited to address them. Dynamic pricing AI automatically adjusts rates during peak periods — Mardi Gras, spring break, summer — without manual intervention. Staffing prediction tools analyze historical patterns to help you schedule appropriately. During slow season, AI marketing tools can target off-peak promotions to locals and drive shoulder-season bookings. Customer segmentation lets you identify your highest-value repeat visitors and market to them directly with personalized offers before peak season fills up.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How do I handle the tourist season swings with AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Seasonal swings are one of the biggest operational challenges for Gulf Coast businesses, and AI is well-suited to address them. Dynamic pricing AI automatically adjusts rates during peak periods — Mardi Gras, spring break, summer — without manual intervention. Staffing prediction tools analyze historical patterns to help you schedule appropriately. During slow season, AI marketing tools can target off-peak promotions to locals and drive shoulder-season bookings.</div></div>
         </div>
 
         <div class="faq-item" data-category="gulf-coast" data-id="faq-20">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Are there AI grants or funding programs available for Mississippi small businesses?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes — and this is an active area worth pursuing. Innovate Mississippi actively supports technology adoption for small businesses across the state. The Mississippi Development Authority (MDA) has programs supporting business modernization. At the federal level, SBIR (Small Business Innovation Research) grants fund businesses developing or adopting innovative technology. The Gulf Coast Restoration Fund has also funded technology and workforce initiatives in the tri-county area. AI writing tools can actually help you draft stronger grant applications — use them to articulate your business case clearly and compellingly. The best starting point is a conversation with Innovate Mississippi at innovate.ms.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Are there AI grants or funding programs available for Mississippi small businesses?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes — and this is an active area worth pursuing. Innovate Mississippi actively supports technology adoption for small businesses across the state. The Mississippi Development Authority has programs supporting business modernization. At the federal level, SBIR grants fund businesses developing or adopting innovative technology. AI writing tools can actually help you draft stronger grant applications. The best starting point is a conversation with Innovate Mississippi at innovate.ms.</div></div>
         </div>
 
         <div class="faq-item" data-category="gulf-coast" data-id="faq-21">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How can casino-adjacent businesses on the Gulf Coast use AI?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Businesses near Biloxi's casino corridor — restaurants, hotels, entertainment venues, retail — benefit from AI in ways directly tied to the gaming visitor profile. AI tools can analyze casino event calendars and automatically ramp up marketing before major events and conventions. Customer data analysis identifies which casino visitors become repeat customers versus one-time visitors, allowing targeted retention marketing. For restaurants near casinos, AI reservation and waitlist management handles the unpredictable surge of guests leaving the floor. Late-night AI phone answering captures the post-midnight crowd that calls for hours and availability when your staff has gone home.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How can casino-adjacent businesses on the Gulf Coast use AI?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Businesses near Biloxi's casino corridor — restaurants, hotels, entertainment venues, retail — benefit from AI in ways directly tied to the gaming visitor profile. AI tools can analyze casino event calendars and automatically ramp up marketing before major events. For restaurants near casinos, AI reservation and waitlist management handles the unpredictable surge of guests leaving the floor. Late-night AI phone answering captures the post-midnight crowd that calls for hours and availability when your staff has gone home.</div></div>
         </div>
 
-        <!-- IMPLEMENTATION -->
         <div class="faq-item" data-category="implementation" data-id="faq-22">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How long does it take to get AI set up in my business?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              It depends on what you're implementing. A basic AI chatbot on your website: a few hours. An AI-powered phone answering system: one to two days including testing. A full AI-integrated website with booking, follow-up automation, and social media scheduling: typically one to two weeks through a done-for-you platform. Custom AI integrations for larger businesses: four to twelve weeks. The honest answer is that the setup time is almost never the bottleneck — it's getting your own information organized (business hours, services, pricing, FAQs) that takes time. The more prepared you are with your own content, the faster any AI system can be trained on your business.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How long does it take to get AI set up in my business?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">It depends on what you're implementing. A basic AI chatbot on your website: a few hours. An AI-powered phone answering system: one to two days including testing. A full AI-integrated website with booking, follow-up automation, and social media scheduling: typically one to two weeks through a done-for-you platform. The honest answer is that the setup time is almost never the bottleneck — it's getting your own information organized that takes time.</div></div>
         </div>
 
         <div class="faq-item" data-category="implementation" data-id="faq-23">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Do I need to hire someone to set up and manage AI for my business?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Not necessarily — it depends on the complexity of what you want. Simple tools like ChatGPT, Canva AI, or basic chatbots are genuinely self-service and most business owners figure them out in an afternoon. For more integrated systems — AI phone answering, automated booking, website AI, social media scheduling — done-for-you platforms handle all the technical work and charge a monthly fee. For custom AI builds connected to your existing software systems, you'll need either a tech-savvy employee or an outside provider. The sweet spot for most Gulf Coast small businesses is a done-for-you platform that handles everything for a flat monthly rate, with no technical knowledge required on your end.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Do I need to hire someone to set up and manage AI for my business?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Not necessarily. Simple tools like ChatGPT, Canva AI, or basic chatbots are genuinely self-service. For more integrated systems — AI phone answering, automated booking, website AI, social media scheduling — done-for-you platforms handle all the technical work for a monthly fee. The sweet spot for most Gulf Coast small businesses is a done-for-you platform that handles everything for a flat monthly rate, with no technical knowledge required.</div></div>
         </div>
 
         <div class="faq-item" data-category="implementation" data-id="faq-24">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>What are the most common AI mistakes small businesses make?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              The five most common mistakes: (1) <strong>Trying to do everything at once</strong> — pick one problem, solve it with AI, then expand. (2) <strong>Not reviewing AI output</strong> — AI makes mistakes, especially with specific local details. Always have a human review customer-facing content. (3) <strong>Choosing tools based on hype</strong> — the most-advertised AI tool is rarely the best fit for a local service business. Match the tool to the specific problem. (4) <strong>Abandoning it too soon</strong> — AI tools improve as they learn your business. Give it 60 to 90 days before judging results. (5) <strong>Ignoring training</strong> — spend one hour getting comfortable with a new tool before deploying it with customers. That hour pays for itself immediately.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>What are the most common AI mistakes small businesses make?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">The five most common mistakes: (1) <strong>Trying to do everything at once</strong> — pick one problem, solve it with AI, then expand. (2) <strong>Not reviewing AI output</strong> — AI makes mistakes, especially with specific local details. (3) <strong>Choosing tools based on hype</strong> — match the tool to the specific problem. (4) <strong>Abandoning it too soon</strong> — give it 60 to 90 days before judging results. (5) <strong>Ignoring training</strong> — spend one hour getting comfortable with a new tool before deploying it with customers.</div></div>
         </div>
 
         <div class="faq-item" data-category="implementation" data-id="faq-25">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How do I measure whether AI is actually helping my business?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Measure what matters before you start so you have a baseline. Key metrics to track: number of leads captured per week, percentage of calls answered, time spent on administrative tasks per day, customer review count and average rating, and revenue per month. After 60 to 90 days with AI tools in place, compare those numbers. Most businesses see the clearest ROI in leads captured outside business hours (AI phone answering) and time saved on repetitive writing tasks. If an AI tool costs $100/month and saves you five hours per week, and your time is worth $30/hour, that's $520/month in value against $100 in cost. The math is usually very clear.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How do I measure whether AI is actually helping my business?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Measure what matters before you start so you have a baseline. Key metrics to track: number of leads captured per week, percentage of calls answered, time spent on administrative tasks per day, customer review count and average rating, and revenue per month. After 60 to 90 days with AI tools in place, compare those numbers. If an AI tool costs $100/month and saves you five hours per week, and your time is worth $30/hour, that's $520/month in value against $100 in cost. The math is usually very clear.</div></div>
         </div>
 
-        <!-- ADVANCED -->
         <div class="faq-item" data-category="advanced" data-id="faq-26">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Can AI help me hire better employees?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes — and it's one of the most underused AI applications for small businesses. AI can write better job postings that attract more qualified applicants. It can screen resumes and applications against your criteria, surfacing the top candidates without you reading every submission. AI interview question generators create structured, fair interviews that reveal more about candidates. Some platforms use AI to analyze communication patterns in written applications to predict cultural fit. Important note: any AI screening tool must be applied consistently and cannot discriminate based on protected characteristics — same legal standards as traditional hiring apply. Used correctly, AI hiring tools cut time-to-hire and improve the quality of who you bring in.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Can AI help me hire better employees?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes — and it's one of the most underused AI applications for small businesses. AI can write better job postings, screen resumes against your criteria, and generate structured interview questions. Important note: any AI screening tool must be applied consistently and cannot discriminate based on protected characteristics — same legal standards as traditional hiring apply. Used correctly, AI hiring tools cut time-to-hire and improve the quality of who you bring in.</div></div>
         </div>
 
         <div class="faq-item" data-category="advanced" data-id="faq-27">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Can AI help me manage inventory and reduce waste?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Inventory AI is one of the most proven ROI applications in business. For restaurants and food businesses, AI demand forecasting reduces food waste by predicting exactly what you'll sell based on weather, day of week, local events, and historical data. For retail and supply businesses, AI reorder systems automatically trigger purchase orders when stock hits a threshold, preventing both overstock and stockouts. For service businesses with parts inventory, AI tracks usage patterns and flags items that are consistently running short. Gulf Coast restaurants dealing with fresh Gulf seafood have particular upside here — better demand prediction means fresher product and less spoilage, which directly impacts both margins and quality.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>Can AI help me manage inventory and reduce waste?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Inventory AI is one of the most proven ROI applications in business. For restaurants and food businesses, AI demand forecasting reduces food waste by predicting exactly what you'll sell based on weather, day of week, local events, and historical data. Gulf Coast restaurants dealing with fresh Gulf seafood have particular upside here — better demand prediction means fresher product and less spoilage, which directly impacts both margins and quality.</div></div>
         </div>
 
         <div class="faq-item" data-category="advanced" data-id="faq-28">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>How can AI help with my business accounting and finances?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              AI is transforming small business accounting in practical ways. Tools like QuickBooks AI and FreshBooks automatically categorize transactions, flag unusual expenses, and generate plain-English summaries of your financial position — no accounting degree needed. AI can scan and process receipts via your phone camera, eliminating manual data entry. Cash flow forecasting AI projects your runway weeks in advance, giving you time to act before problems become crises. For tax preparation, AI tools identify deductions you might miss and flag potential issues before your accountant sees them. These tools don't replace your accountant — they make your books cleaner and your accountant's time more focused on strategy rather than cleanup.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>How can AI help with my business accounting and finances?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">AI is transforming small business accounting in practical ways. Tools like QuickBooks AI automatically categorize transactions, flag unusual expenses, and generate plain-English summaries of your financial position. AI can scan and process receipts via your phone camera, eliminating manual data entry. Cash flow forecasting AI projects your runway weeks in advance. These tools don't replace your accountant — they make your books cleaner and your accountant's time more focused on strategy.</div></div>
         </div>
 
         <div class="faq-item" data-category="advanced" data-id="faq-29">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>What is an AI avatar and should my business have one?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              An AI avatar — sometimes called a digital twin or AI representative — is a video or chat-based AI persona that represents your business, answers questions, and guides customers through your services. Think of it as a virtual version of your best salesperson, available 24/7. For Gulf Coast service businesses, a well-configured AI avatar on your website can greet visitors, answer common questions, collect lead information, and book appointments — all without human involvement. The technology has matured significantly in 2025 and 2026. Basic AI chat avatars are available through most modern website platforms. Video-based AI avatars that speak and respond are more advanced but increasingly affordable. For businesses where the owner's personal brand matters — attorneys, financial advisors, consultants — an AI avatar modeled on your own voice and likeness is a powerful credibility tool.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>What is an AI avatar and should my business have one?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">An AI avatar is a video or chat-based AI persona that represents your business, answers questions, and guides customers through your services. For Gulf Coast service businesses, a well-configured AI avatar on your website can greet visitors, answer common questions, collect lead information, and book appointments — all without human involvement. The technology has matured significantly in 2025 and 2026. For businesses where the owner's personal brand matters — attorneys, financial advisors, consultants — an AI avatar modeled on your own voice and likeness is a powerful credibility tool.</div></div>
         </div>
 
         <div class="faq-item" data-category="advanced" data-id="faq-30">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>What's the difference between AI tools and hiring an AI marketing agency?</span>
-            <span class="chevron">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              AI tools are software you use yourself or through a platform — you pay a monthly subscription and get access to capabilities. An AI marketing agency uses those same tools on your behalf, plus provides strategy, content creation, and ongoing management. The tradeoff is cost versus involvement. DIY AI tools: $50–$300/month, requires your time and some learning curve. Done-for-you AI platforms (like those built specifically for local service businesses): $99–$218/month, handles everything technically but you provide the business information. Full-service AI marketing agency: $500–$3,000+/month, truly hands-off. For most Gulf Coast small businesses just getting started, a done-for-you platform is the right first step — you get professional results without the agency price tag, and you can always upgrade later.
-            </div>
-          </div>
+          <button class="faq-question" onclick="toggleFAQ(this)"><span>What's the difference between AI tools and hiring an AI marketing agency?</span><span class="chevron">&#9660;</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">AI tools are software you use yourself — you pay a monthly subscription and get access to capabilities. An AI marketing agency uses those same tools on your behalf, plus provides strategy, content creation, and ongoing management. DIY AI tools: $50–$300/month, requires your time. Done-for-you AI platforms built for local service businesses: $99–$218/month, handles everything technically. Full-service AI marketing agency: $500–$3,000+/month, truly hands-off. For most Gulf Coast small businesses just getting started, a done-for-you platform is the right first step.</div></div>
         </div>
 
       </div><!-- end faq-list -->
     </div><!-- end faq-section -->
 
+    <!-- BLOG SECTION -->
+    <div class="blog-section" id="blogSection">
+      <div class="blog-section-hdr">Gulf Coast AI Insights</div>
+      <p class="blog-section-sub">Weekly guides, strategies, and real-world AI applications for Mississippi and Gulf Coast small businesses.</p>
+      <div class="blog-grid" id="blogGrid">
+        <div class="blog-empty" style="grid-column:1/-1;">Loading articles...</div>
+      </div>
+      <div style="text-align:center;margin-top:2rem;display:none;" id="blogLoadMore">
+        <button class="btn-load-more" onclick="loadMorePosts()">Load More Articles</button>
+      </div>
+    </div>
+
   </main>
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-
-    <!-- Ad Unit -->
     <div class="sidebar-card" style="padding:0.75rem;">
-      <div class="ad-placeholder">
-        Advertisement<br/>
-        <span style="font-size:0.55rem;display:block;margin-top:0.25rem;">AdSense 300×250</span>
-      </div>
+      <div class="ad-placeholder">Advertisement<br/><span style="font-size:0.55rem;display:block;margin-top:0.25rem;">AdSense 300&times;250</span></div>
     </div>
-
-    <!-- Popular Topics -->
     <div class="sidebar-card">
       <div class="sidebar-title">Hot Topics</div>
       <div>
@@ -933,8 +603,6 @@ footer {
         <span class="topic-pill" onclick="prefillQuestion('AI for inventory management and reducing waste')">Inventory AI</span>
       </div>
     </div>
-
-    <!-- Stats card -->
     <div class="sidebar-card">
       <div class="sidebar-title">By the Numbers</div>
       <div class="stat-row"><span class="stat-label">MS businesses using AI</span><span class="stat-val">~12%</span></div>
@@ -942,16 +610,9 @@ footer {
       <div class="stat-row"><span class="stat-label">Avg. cost of AI tools</span><span class="stat-val">$99–$200/mo</span></div>
       <div class="stat-row"><span class="stat-label">Calls missed after hours</span><span class="stat-val">~62%</span></div>
     </div>
-
-    <!-- Second Ad Unit -->
     <div class="sidebar-card" style="padding:0.75rem;">
-      <div class="ad-placeholder" style="height:200px;">
-        Advertisement<br/>
-        <span style="font-size:0.55rem;display:block;margin-top:0.25rem;">AdSense 300×200</span>
-      </div>
+      <div class="ad-placeholder" style="height:200px;">Advertisement<br/><span style="font-size:0.55rem;display:block;margin-top:0.25rem;">AdSense 300&times;200</span></div>
     </div>
-
-    <!-- About box -->
     <div class="sidebar-card">
       <div class="sidebar-title">About This Resource</div>
       <p style="font-size:0.78rem;line-height:1.75;color:var(--muted);">
@@ -959,7 +620,6 @@ footer {
         Our mission: help Gulf Coast entrepreneurs access the same AI advantages available to large corporations — without the enterprise price tag.
       </p>
     </div>
-
   </aside>
 </div>
 
@@ -984,125 +644,184 @@ footer {
 
 <div class="toast" id="toast"></div>
 
+<!-- Blog Post Modal -->
+<div class="blog-modal-overlay" id="blogModal" onclick="closeBlogModal(event)">
+  <div class="blog-modal">
+    <button class="blog-modal-close" onclick="closeBlogModalBtn()">&times;</button>
+    <div class="blog-modal-cat" id="modalCat"></div>
+    <div class="blog-modal-title" id="modalTitle"></div>
+    <div class="blog-modal-meta" id="modalMeta"></div>
+    <div class="blog-modal-body" id="modalBody"></div>
+  </div>
+</div>
+
 <script>
 // ── FAQ TOGGLE ──
 function toggleFAQ(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-
-  // Close all
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-
-  // Open clicked if wasn't open
+  var item = btn.closest('.faq-item');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
   if (!isOpen) {
     item.classList.add('open');
-    // Track FAQ click
     trackFAQ(item.dataset.id, btn.querySelector('span').textContent.trim());
   }
 }
 
-// ── FAQ FILTER ──
 function filterFAQ(cat, btn) {
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
-  document.querySelectorAll('.faq-item').forEach(item => {
+  document.querySelectorAll('.faq-item').forEach(function(item) {
     item.style.display = (cat === 'all' || item.dataset.category === cat) ? 'block' : 'none';
   });
 }
 
-// ── FAQ CLICK TRACKING ──
 async function trackFAQ(faqId, question) {
   try {
     await fetch('/api/track-faq', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ faq_id: faqId, question, timestamp: new Date().toISOString() })
+      body: JSON.stringify({ faq_id: faqId, question: question, timestamp: new Date().toISOString() })
     });
-  } catch(e) {
-    // silent fail — tracking is non-critical
-  }
+  } catch(e) {}
 }
 
-// ── PREFILL QUESTION ──
 function prefillQuestion(text) {
   document.getElementById('questionInput').value = text;
   document.getElementById('questionInput').scrollIntoView({ behavior: 'smooth', block: 'center' });
   document.getElementById('questionInput').focus();
 }
 
-// ── SUBMIT QUESTION ──
 async function submitQuestion() {
-  const question = document.getElementById('questionInput').value.trim();
-  const email    = document.getElementById('emailInput').value.trim();
-  const btn      = document.getElementById('askBtn');
-
+  var question = document.getElementById('questionInput').value.trim();
+  var email    = document.getElementById('emailInput').value.trim();
+  var btn      = document.getElementById('askBtn');
   if (!question) { showToast('Please enter a question first.'); return; }
   if (!email || !email.includes('@')) { showToast('Please enter a valid email to receive your answer.'); return; }
-
-  // UI state
   btn.disabled = true;
   btn.textContent = 'Thinking...';
   document.getElementById('loadingDots').classList.add('visible');
   document.getElementById('answerBox').classList.remove('visible');
-
   try {
-    // Save lead + question to backend
     await fetch('/api/advisor-lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, question, timestamp: new Date().toISOString(), source: 'precursus-ai-advisor' })
-    }).catch(() => {}); // non-blocking
-
-    // Call Claude API
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      body: JSON.stringify({ email: email, question: question, timestamp: new Date().toISOString(), source: 'precursus-ai-advisor' })
+    }).catch(function(){});
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
-        system: `You are the Gulf Coast AI Business Advisor, a free resource powered by Precursus Think Tank in Bay St. Louis, Mississippi. You help small business owners on the Mississippi Gulf Coast and surrounding areas understand how to use artificial intelligence to grow their businesses.
-
-Your answers must be:
-- Written in plain, friendly language — no jargon
-- Specific and actionable — give real suggestions, not vague advice
-- Relevant to small/local businesses (restaurants, contractors, retail, services, tourism, etc.)
-- Honest about costs, limitations, and realistic timelines
-- Focused on practical Gulf Coast/Mississippi context when relevant
-- Concise but complete — 3 to 5 paragraphs maximum
-
-Never sell anything. Never mention specific company names in a promotional way. You may reference well-known free tools (ChatGPT, Google, Canva, etc.) as examples only. End every response with one specific, actionable "First Step" the business owner can take today.`,
+        system: 'You are the Gulf Coast AI Business Advisor, a free resource powered by Precursus Think Tank in Bay St. Louis, Mississippi. You help small business owners on the Mississippi Gulf Coast and surrounding areas understand how to use artificial intelligence to grow their businesses.\n\nYour answers must be:\n- Written in plain, friendly language — no jargon\n- Specific and actionable — give real suggestions, not vague advice\n- Relevant to small/local businesses (restaurants, contractors, retail, services, tourism, etc.)\n- Honest about costs, limitations, and realistic timelines\n- Focused on practical Gulf Coast/Mississippi context when relevant\n- Concise but complete — 3 to 5 paragraphs maximum\n\nNever sell anything. Never mention specific company names in a promotional way. You may reference well-known free tools (ChatGPT, Google, Canva, etc.) as examples only. End every response with one specific, actionable "First Step" the business owner can take today.',
         messages: [{ role: 'user', content: question }]
       })
     });
-
-    const data = await response.json();
-    const answer = data.content?.[0]?.text || 'I apologize — something went wrong. Please try again in a moment.';
-
+    var data = await response.json();
+    var answer = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : 'I apologize — something went wrong. Please try again in a moment.';
     document.getElementById('answerText').textContent = answer;
     document.getElementById('answerBox').classList.add('visible');
-    showToast('Answer delivered! Check your email for a copy.');
-
+    showToast('Answer delivered!');
   } catch(err) {
     showToast('Connection error. Please try again.');
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Get Answer →';
+    btn.textContent = 'Get Answer \u2192';
     document.getElementById('loadingDots').classList.remove('visible');
   }
 }
 
-// ── TOAST ──
 function showToast(msg) {
-  const t = document.getElementById('toast');
+  var t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
+  setTimeout(function() { t.classList.remove('show'); }, 3500);
 }
 
-// ── ENTER KEY on email ──
-document.getElementById('emailInput').addEventListener('keydown', e => {
+document.getElementById('emailInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') submitQuestion();
 });
+
+// ── BLOG ──
+var blogPosts = [];
+var blogPage = 0;
+var POSTS_PER_PAGE = 6;
+
+async function loadBlogPosts() {
+  try {
+    var res = await fetch('/api/posts');
+    var data = await res.json();
+    blogPosts = data.posts || [];
+    renderBlogPosts(true);
+  } catch(e) {
+    document.getElementById('blogGrid').innerHTML = '<div class="blog-empty" style="grid-column:1/-1;">Articles coming soon. Check back Monday for our first Gulf Coast AI guide.</div>';
+  }
+}
+
+function renderBlogPosts(reset) {
+  var grid = document.getElementById('blogGrid');
+  if (reset) { grid.innerHTML = ''; blogPage = 0; }
+  var start = blogPage * POSTS_PER_PAGE;
+  var slice = blogPosts.slice(start, start + POSTS_PER_PAGE);
+  if (!blogPosts.length) {
+    grid.innerHTML = '<div class="blog-empty" style="grid-column:1/-1;">Articles coming soon. Check back Monday for our first Gulf Coast AI guide.</div>';
+    return;
+  }
+  slice.forEach(function(post) {
+    var card = document.createElement('div');
+    card.className = 'blog-card';
+    card.onclick = function() { openBlogPost(post.slug); };
+    card.innerHTML =
+      '<div class="blog-card-cat">' + escBlog(post.category) + '</div>' +
+      '<div class="blog-card-title">' + escBlog(post.title) + '</div>' +
+      '<div class="blog-card-excerpt">' + escBlog(post.excerpt) + '</div>' +
+      '<div class="blog-card-footer"><span>' + formatBlogDate(post.date) + '</span><span class="blog-card-read">Read &rarr;</span></div>';
+    grid.appendChild(card);
+  });
+  blogPage++;
+  var hasMore = blogPage * POSTS_PER_PAGE < blogPosts.length;
+  document.getElementById('blogLoadMore').style.display = hasMore ? 'block' : 'none';
+}
+
+function loadMorePosts() { renderBlogPosts(false); }
+
+async function openBlogPost(slug) {
+  try {
+    var res = await fetch('/api/posts/' + slug);
+    var data = await res.json();
+    if (!data.post) return;
+    var post = data.post;
+    document.getElementById('modalCat').textContent = post.category;
+    document.getElementById('modalTitle').textContent = post.title;
+    document.getElementById('modalMeta').textContent = formatBlogDate(post.date) + '  \u2022  ' + (post.author || 'Precursus Think Tank');
+    var body = post.content;
+    if (!body.includes('<')) {
+      body = body.split('\n\n').map(function(p) { return '<p>' + p + '</p>'; }).join('');
+    }
+    document.getElementById('modalBody').innerHTML = body;
+    document.getElementById('blogModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  } catch(e) {}
+}
+
+function closeBlogModal(e) {
+  if (e.target === document.getElementById('blogModal')) closeBlogModalBtn();
+}
+function closeBlogModalBtn() {
+  document.getElementById('blogModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBlogModalBtn(); });
+
+function escBlog(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function formatBlogDate(d) {
+  if (!d) return '';
+  try { return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }); } catch(e) { return d; }
+}
+
+loadBlogPosts();
 </script>
 
 </body>
