@@ -9,3 +9,6 @@ binding = "ASSETS"
 [[kv_namespaces]]
 binding = "PRECURSUS_KV"
 id = "98650f2d900c41a5a516bdc5fcac876d"
+
+[triggers]
+crons = ["0 13 * * 1"]
